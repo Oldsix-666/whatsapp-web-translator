@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>聊天翻译设置</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>WhatsApp Web 聊天翻译</h1>
+    <p class="sub">译文只显示在本地，原文不会被改动</p>
+  </header>
+
+  <section>
+    <h2>翻译引擎</h2>
+    <label class="row">
+      <span>引擎</span>
+      <select id="engineMode">
+        <option value="auto">自动（微软 → Google）</option>
+        <option value="microsoft">仅微软</option>
+        <option value="google">仅 Google</option>
+      </select>
+    </label>
+    <p class="hint">Google 接口在部分网络下无法访问；选「自动」会先试微软，失败再回退。</p>
+  </section>
+
+  <section>
+    <h2>收到的消息</h2>
+    <label class="row switch">
+      <span>自动翻译对方发来的消息</span>
+      <input type="checkbox" id="autoIncoming">
+    </label>
+    <label class="row">
+      <span>翻译成</span>
+      <select id="incomingTarget"></select>
+    </label>
+    <label class="row switch">
+      <span>显示手动翻译按钮</span>
+      <input type="checkbox" id="manualButton">
+    </label>
+  </section>
+
+  <section>
+    <h2>我输入的内容</h2>
+    <label class="row switch">
+      <span>允许翻译输入框草稿</span>
+      <input type="checkbox" id="draftEnabled">
+    </label>
+    <label class="row switch">
+      <span>自动翻译我输入的内容</span>
+      <input type="checkbox" id="autoTranslateDraft">
+    </label>
+    <label class="row">
+      <span>翻译成</span>
+      <select id="draftTargetLang"></select>
+    </label>
+    <label class="row switch">
+      <span>翻译后自动发送</span>
+      <input type="checkbox" id="autoSendAfterTranslate">
+    </label>
+    <p class="hint">「自动翻译我输入的内容」会在你停止打字约 1 秒后把草稿替换成译文。自动发送属于模拟人工操作，频率过高可能触发 WhatsApp 风控，默认关闭。</p>
+  </section>
+
+  <section>
+    <h2>快捷键</h2>
+    <ul class="keys">
+      <li><kbd>Alt</kbd>+<kbd>T</kbd><span>翻译草稿</span></li>
+      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd><span>翻译并发送</span></li>
+      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd><span>开关自动翻译</span></li>
+    </ul>
+    <button type="button" id="shortcutBtn" class="link">修改快捷键</button>
+    <button type="button" id="diagBtn" class="link">诊断当前页面</button>
+  </section>
+
+  <footer><span id="status" class="status"></span></footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

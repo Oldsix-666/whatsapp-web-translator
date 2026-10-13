@@ -1,0 +1,5 @@
+# 统一按 LF 存储与检出，避免 Windows/Unix 之间的换行符差异产生 diff 噪音
+* text=auto eol=lf
+
+# 二进制文件不做任何转换
+*.png binary

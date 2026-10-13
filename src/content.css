@@ -1,0 +1,212 @@
+/* ============================================================
+   WhatsApp Web 聊天翻译 —— 注入到页面的样式
+   所有 class 都以 wa- 前缀，避免与 WhatsApp 自身样式冲突
+   ============================================================ */
+
+.wa-trans,
+.wa-trans * {
+  box-sizing: border-box;
+}
+
+.wa-trans {
+  --wa-bg: #e7f6ee;
+  --wa-fg: #06381f;
+  --wa-border: #25d366;
+  --wa-muted: #6b7b73;
+  --wa-error: #b3261e;
+
+  display: flex;
+  padding: 2px 6% 8px;
+  font-family: system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: 13.5px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.wa-trans-in { justify-content: flex-start; }
+.wa-trans-out { justify-content: flex-end; }
+
+.wa-trans-body {
+  max-width: 65%;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--wa-bg);
+  color: var(--wa-fg);
+  border-radius: 8px;
+  border-left: 3px solid var(--wa-border);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.wa-trans-text {
+  white-space: pre-wrap;
+  flex: 1 1 auto;
+}
+
+.wa-trans-acts {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.wa-trans:hover .wa-trans-acts,
+.wa-trans[data-state="idle"] .wa-trans-acts {
+  opacity: 1;
+}
+
+.wa-trans-btn {
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 6px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--wa-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.wa-trans-btn:hover {
+  color: var(--wa-border);
+  border-color: var(--wa-border);
+}
+
+/* ---------- 各状态 ---------- */
+
+.wa-trans[data-state="loading"] .wa-trans-body {
+  border-left-color: var(--wa-muted);
+  color: var(--wa-muted);
+}
+
+.wa-trans[data-state="loading"] .wa-trans-text::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: wa-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes wa-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+
+.wa-trans[data-state="error"] .wa-trans-body {
+  background: #fdecea;
+  color: var(--wa-error);
+  border-left-color: var(--wa-error);
+}
+
+.wa-trans[data-state="idle"] .wa-trans-body {
+  background: transparent;
+  border-left-color: transparent;
+  padding: 2px 0;
+}
+
+/* ---------- 深色模式 ---------- */
+
+body.dark .wa-trans,
+.dark .wa-trans,
+html[data-theme="dark"] .wa-trans {
+  --wa-bg: #0f3d2a;
+  --wa-fg: #d9f2e3;
+  --wa-muted: #9fb0a8;
+}
+
+body.dark .wa-trans[data-state="error"] .wa-trans-body,
+.dark .wa-trans[data-state="error"] .wa-trans-body {
+  background: #4a1f1c;
+  color: #ffb4ab;
+}
+
+/* ---------- 页面右下角提示条 ---------- */
+
+.wa-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483000;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #111b21;
+  color: #e9edef;
+  font-family: system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.wa-toast[data-show="1"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wa-toast[data-kind="error"] {
+  background: #7f1d1d;
+}
+
+
+/* ---------- 诊断浮层 ---------- */
+
+.wa-diag {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2147483001;
+  width: 480px;
+  max-width: 92vw;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  background: #111b21;
+  color: #e9edef;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  font-family: Consolas, Menlo, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.wa-diag-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #25d366;
+  color: #04241a;
+  font-family: system-ui, "Microsoft YaHei", sans-serif;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+}
+
+.wa-diag-close {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.wa-diag-pre {
+  margin: 0;
+  padding: 10px 12px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

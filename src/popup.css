@@ -1,0 +1,138 @@
+:root {
+  --green: #25d366;
+  --deep: #128c7e;
+  --text: #111b21;
+  --muted: #667781;
+  --line: #e4e9ec;
+  --bg: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 340px;
+  margin: 0;
+  padding: 0 0 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+header {
+  padding: 12px 14px 10px;
+  background: linear-gradient(135deg, var(--green), var(--deep));
+  color: #fff;
+}
+
+h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sub {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  opacity: 0.85;
+}
+
+h2 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+section {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 28px;
+  cursor: pointer;
+}
+
+.row span { flex: 1 1 auto; }
+
+select {
+  flex: 0 0 auto;
+  max-width: 150px;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--deep);
+  cursor: pointer;
+}
+
+.hint {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.keys {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.keys li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 0;
+}
+
+.keys li span {
+  margin-left: 6px;
+  color: var(--muted);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: #f7f9fa;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: center;
+}
+
+.link {
+  margin-top: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--deep);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+footer {
+  padding: 8px 14px 0;
+}
+
+.status {
+  font-size: 11.5px;
+  color: var(--muted);
+}

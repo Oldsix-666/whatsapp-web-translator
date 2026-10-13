@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Web 聊天翻译",
+  "version": "1.0.0",
+  "description": "自动把 WhatsApp 网页版收到的消息翻译成中文，也能把你输入的中文翻译成对方语言后发送。",
+  "minimum_chrome_version": "116",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://edge.microsoft.com/*",
+    "https://translate.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "聊天翻译设置",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "translate-draft": {
+      "suggested_key": { "default": "Alt+T" },
+      "description": "翻译输入框中的草稿"
+    },
+    "translate-draft-and-send": {
+      "suggested_key": { "default": "Alt+Shift+T" },
+      "description": "翻译输入框中的草稿并发送"
+    },
+    "toggle-auto-incoming": {
+      "suggested_key": { "default": "Alt+Shift+A" },
+      "description": "开关「收到消息自动翻译」"
+    }
+  }
+}
